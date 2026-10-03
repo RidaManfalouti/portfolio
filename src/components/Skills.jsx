@@ -2,9 +2,11 @@ import React from 'react';
 import { Server, Layout, Cpu, Database, Award, CheckCircle, Flame } from 'lucide-react';
 import { skillsData, certifications } from '../data/portfolioData';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Skills() {
   const [sectionRef, isVisible] = useScrollReveal();
+  const { t } = useLanguage();
 
   const iconMap = {
     Server: Server,
@@ -25,13 +27,13 @@ export default function Skills() {
         <div className={`text-center max-w-3xl mx-auto space-y-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-wider uppercase bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/30">
             <Flame className="w-3.5 h-3.5 text-[#00783C]" />
-            Stack Technologique
+            {t.skills.badge}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold dark:text-white text-black tracking-tight">
-            Compétences Techniques
+            {t.skills.title}
           </h2>
           <p className="dark:text-neutral-300 text-neutral-700 text-sm sm:text-base leading-relaxed">
-            Une expertise combinant la rigueur du développement back-end d'entreprise, l'ergonomie front-end moderne et l'intégration de modèles d'IA générative avancés.
+            {t.skills.subtitle}
           </p>
         </div>
 
@@ -49,7 +51,7 @@ export default function Skills() {
                 style={{ transitionDelay: `${index * 120}ms` }}
               >
                 {/* Header card icon and title (Small Title in #00783C) */}
-                <div className="flex items-center space-x-3 mb-5">
+                <div className="flex items-center space-x-3 rtl:space-x-reverse mb-5">
                   <div className="p-2.5 rounded-xl bg-[#00783C] text-white shadow-md">
                     <IconComponent className="w-5 h-5" />
                   </div>
@@ -65,7 +67,7 @@ export default function Skills() {
                       key={sIdx}
                       className="p-2.5 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 hover:border-[#00783C]/60 transition-all flex items-center justify-between shadow-xs"
                     >
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-2 rtl:space-x-reverse">
                         <CheckCircle className="w-3.5 h-3.5 text-[#00783C] shrink-0" />
                         <span className="text-xs sm:text-sm font-medium dark:text-white text-black">
                           {skill.name}
@@ -80,8 +82,8 @@ export default function Skills() {
 
                 {/* Bottom decorative accent line */}
                 <div className="mt-5 pt-3 border-t dark:border-neutral-800 border-neutral-200 flex items-center justify-between text-[11px] dark:text-neutral-400 text-neutral-600 font-mono">
-                  <span>Niveau</span>
-                  <span className="text-[#00783C] font-semibold">Production Ready</span>
+                  <span>{t.skills.level}</span>
+                  <span className="text-[#00783C] font-semibold">{t.skills.productionReady}</span>
                 </div>
               </div>
             );
@@ -94,11 +96,11 @@ export default function Skills() {
             <div className="space-y-1 max-w-md">
               <div className="flex items-center gap-2 text-[#00783C] font-mono text-xs uppercase tracking-wider font-semibold">
                 <Award className="w-4 h-4 text-[#00783C]" />
-                Accréditations & Certifications
+                {t.skills.certBadge}
               </div>
-              <h4 className="text-xl font-bold dark:text-white text-black">Validations Officielles</h4>
+              <h4 className="text-xl font-bold dark:text-white text-black">{t.skills.certTitle}</h4>
               <p className="dark:text-neutral-300 text-neutral-700 text-xs sm:text-sm">
-                Des certifications reconnues mondialement validant des compétences en Java, Spring Boot, architecture objet et pratiques Git.
+                {t.skills.certSubtitle}
               </p>
             </div>
 

@@ -7,6 +7,10 @@
     scroll-behavior: smooth;
   }
 
+  html[lang="ar"], html.rtl {
+    font-family: 'Cairo', 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
   body {
     background-color: #000000;
     color: #ffffff;

@@ -3,6 +3,7 @@ import { Sparkles, CheckCircle2, Layers, Workflow } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import { projects } from '../data/portfolioData';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useLanguage } from '../context/LanguageContext';
 import ProjectArchitectureModal from './ProjectArchitectureModal';
 
 export default function Projects() {
@@ -10,17 +11,18 @@ export default function Projects() {
   const [filter, setFilter] = useState('all');
   const [selectedArchProject, setSelectedArchProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { t, isRtl } = useLanguage();
 
   const categories = [
-    { id: 'all', label: 'Tous les projets' },
-    { id: 'ai', label: 'IA & Data' },
-    { id: 'fullstack', label: 'Full Stack' },
-    { id: 'frontend', label: 'Front-End' },
+    { id: 'all', label: t.projects.allCategories },
+    { id: 'ai', label: t.projects.aiCategory },
+    { id: 'fullstack', label: t.projects.fullstackCategory },
+    { id: 'frontend', label: t.projects.frontendCategory },
   ];
 
   const filteredProjects = projects.filter((project) => {
     if (filter === 'all') return true;
-    if (filter === 'ai') return project.category.toLowerCase().includes('ai');
+    if (filter === 'ai') return project.category.toLowerCase().includes('ai') || project.category.toLowerCase().includes('ia');
     if (filter === 'fullstack') return project.category.toLowerCase().includes('full stack') || project.category.toLowerCase().includes('web');
     if (filter === 'frontend') return project.category.toLowerCase().includes('front-end');
     return true;
@@ -43,13 +45,13 @@ export default function Projects() {
         <div className={`text-center max-w-3xl mx-auto space-y-4 mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-wider uppercase bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/30">
             <Layers className="w-3.5 h-3.5 text-[#00783C]" />
-            Portfolio & Prototypes
+            {t.projects.badge}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold dark:text-white text-black tracking-tight">
-            Projets Phares & Architectures
+            {t.projects.title}
           </h2>
           <p className="dark:text-neutral-300 text-neutral-700 text-sm sm:text-base leading-relaxed">
-            Chaque projet dispose de son diagramme d'architecture interactif complet détaillant les couches logicielles, les flux de données et le rôle de chaque technologie.
+            {t.projects.subtitle}
           </p>
 
           {/* Action to open global architecture explorer */}
@@ -59,7 +61,7 @@ export default function Projects() {
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-semibold text-white bg-[#00783C] hover:bg-[#006533] shadow-lg shadow-[#00783C]/20 transition-all duration-300 hover:scale-105"
             >
               <Workflow className="w-4 h-4" />
-              <span>Ouvrir l'Explorateur d'Architecture Global (6 Projets)</span>
+              <span>{t.projects.openExplorer}</span>
             </button>
           </div>
 
@@ -102,7 +104,7 @@ export default function Projects() {
                     {project.category}
                   </span>
 
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 rtl:space-x-reverse">
                     <a
                       href={project.github}
                       target="_blank"
@@ -149,7 +151,7 @@ export default function Projects() {
                   className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs font-semibold text-white bg-[#00783C] hover:bg-[#006533] shadow-md shadow-[#00783C]/20 transition-all duration-200"
                 >
                   <Workflow className="w-4 h-4" />
-                  <span>Architecture & Flux Technique</span>
+                  <span>{t.projects.archBtn}</span>
                 </button>
 
                 {/* Badges list */}

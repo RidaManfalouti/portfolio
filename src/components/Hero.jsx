@@ -2,8 +2,11 @@ import React from 'react';
 import { ArrowRight, Download, Code2, Cpu, CheckCircle2, GraduationCap } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { personalInfo } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Hero() {
+  const { t, isRtl } = useLanguage();
+
   return (
     <section
       id="hero"
@@ -25,7 +28,7 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Main Left Content */}
-          <div className="lg:col-span-7 text-center lg:text-left space-y-6 sm:space-y-8">
+          <div className="lg:col-span-7 text-center lg:text-left rtl:lg:text-right space-y-6 sm:space-y-8">
             
             {/* Status Pill Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 shadow-xs">
@@ -34,33 +37,33 @@ export default function Hero() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00783C]"></span>
               </span>
               <span className="text-xs font-semibold text-[#00783C]">
-                Disponible pour un poste d’ingénieur logiciel
+                {t.hero.availability}
               </span>
             </div>
 
             {/* Main Title */}
             <div className="space-y-2">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15]">
-                <span className="block dark:text-white text-black">Rida Manfalouti</span>
+                <span className="block dark:text-white text-black">{t.hero.greeting}</span>
                 <span className="block text-2xl sm:text-3xl lg:text-4xl text-[#00783C] font-bold mt-2">
-                  Ingénieur Full Stack & Intelligence Artificielle
+                  {t.hero.role}
                 </span>
               </h1>
             </div>
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg dark:text-neutral-400 text-neutral-600 max-w-xl font-normal leading-relaxed mx-auto lg:mx-0">
-              Diplômé de l'EMSI Rabat, je conçois des architectures logicielles modulaires et performantes, enrichies par des intégrations d'intelligence artificielle appliquées aux besoins métier.
+              {t.hero.tagline}
             </p>
 
             {/* CTA Buttons & Social Links */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start rtl:lg:justify-start gap-4 pt-2">
               <a
                 href="#projects"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm text-white bg-[#00783C] hover:bg-[#006533] shadow-md shadow-[#00783C]/20 transition-all duration-300 hover:-translate-y-0.5 group"
               >
-                <span>Explorer mes projets</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <span>{t.hero.exploreProjects}</span>
+                <ArrowRight className={`w-4 h-4 transition-transform ${isRtl ? 'group-hover:-translate-x-1 rotate-180' : 'group-hover:translate-x-1'}`} />
               </a>
 
               <a
@@ -69,11 +72,11 @@ export default function Hero() {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm dark:text-white text-black dark:bg-black bg-white hover:bg-neutral-100 dark:hover:bg-neutral-900 border dark:border-neutral-700 border-neutral-300 hover:border-[#00783C] hover:text-[#00783C] transition-all duration-300 hover:-translate-y-0.5 shadow-xs"
               >
                 <Download className="w-4 h-4 text-[#00783C]" />
-                <span>Télécharger le CV</span>
+                <span>{t.hero.downloadCV}</span>
               </a>
 
               {/* Social Icons */}
-              <div className="flex items-center gap-2 pt-2 sm:pt-0 sm:ml-2">
+              <div className="flex items-center gap-2 pt-2 sm:pt-0 sm:ml-2 rtl:sm:ml-0 rtl:sm:mr-2">
                 <a
                   href={personalInfo.github}
                   target="_blank"
@@ -115,21 +118,21 @@ export default function Hero() {
                     </div>
                     <div>
                       <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#00783C] block">
-                        Diplôme d'Ingénieur d'État
+                        {t.hero.profileTitle}
                       </span>
                       <h3 className="text-base sm:text-lg font-bold dark:text-white text-black leading-tight">
-                        EMSI Rabat — Promo 2026
+                        {t.hero.school}
                       </h3>
                     </div>
                   </div>
                   <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/30">
-                    Bac + 5
+                    {t.hero.degreeLevel}
                   </span>
                 </div>
 
                 {/* Professional Presentation (Single concise paragraph) */}
                 <p className="text-xs sm:text-sm dark:text-neutral-300 text-neutral-700 leading-relaxed font-normal">
-                  Fraîchement diplômé en génie informatique, j’allie de solides compétences en développement logiciel à une expérience concrète acquise en stage. Orienté qualité et maintenabilité, je conçois des systèmes découplés et fiables, prêts à être déployés en production.
+                  {t.hero.presentation}
                 </p>
 
                 {/* Key Pillars */}
@@ -137,24 +140,24 @@ export default function Hero() {
                   <div className="flex items-center gap-3 p-3 rounded-xl dark:bg-neutral-950 bg-neutral-50 border dark:border-neutral-800/80 border-neutral-200/80">
                     <Code2 className="w-4 h-4 text-[#00783C] shrink-0" />
                     <div className="text-xs">
-                      <span className="font-semibold dark:text-white text-black">Stack de référence : </span>
-                      <span className="dark:text-neutral-400 text-neutral-600">.NET Core, Spring Boot, React</span>
+                      <span className="font-semibold dark:text-white text-black">{t.hero.pillarStackLabel} </span>
+                      <span className="dark:text-neutral-400 text-neutral-600">{t.hero.pillarStackValue}</span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3 p-3 rounded-xl dark:bg-neutral-950 bg-neutral-50 border dark:border-neutral-800/80 border-neutral-200/80">
                     <Cpu className="w-4 h-4 text-[#00783C] shrink-0" />
                     <div className="text-xs">
-                      <span className="font-semibold dark:text-white text-black">Spécialisation IA : </span>
-                      <span className="dark:text-neutral-400 text-neutral-600">Pipelines RAG, LLM & OCR</span>
+                      <span className="font-semibold dark:text-white text-black">{t.hero.pillarAiLabel} </span>
+                      <span className="dark:text-neutral-400 text-neutral-600">{t.hero.pillarAiValue}</span>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3 p-3 rounded-xl dark:bg-neutral-950 bg-neutral-50 border dark:border-neutral-800/80 border-neutral-200/80">
                     <CheckCircle2 className="w-4 h-4 text-[#00783C] shrink-0" />
                     <div className="text-xs">
-                      <span className="font-semibold dark:text-white text-black">Disponibilité : </span>
-                      <span className="dark:text-neutral-400 text-neutral-600">Immédiate pour opportunité CDI</span>
+                      <span className="font-semibold dark:text-white text-black">{t.hero.pillarStatusLabel} </span>
+                      <span className="dark:text-neutral-400 text-neutral-600">{t.hero.pillarStatusValue}</span>
                     </div>
                   </div>
                 </div>
@@ -163,10 +166,10 @@ export default function Hero() {
                 <div className="pt-4 border-t dark:border-neutral-800 border-neutral-200 flex items-center justify-between text-xs">
                   <span className="text-xs font-semibold text-[#00783C] flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00783C]"></span>
-                    Prêt à intégrer vos équipes
+                    {t.hero.readyToJoin}
                   </span>
                   <span className="text-[11px] font-mono dark:text-neutral-500 text-neutral-500">
-                    Mobilité nationale
+                    {t.hero.mobility}
                   </span>
                 </div>
 

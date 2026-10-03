@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { Briefcase, Calendar, MapPin, Sparkles, ChevronRight, GraduationCap, Workflow, ListFilter } from 'lucide-react';
 import { experiences, education } from '../data/portfolioData';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useLanguage } from '../context/LanguageContext';
 import AlgoArchitectureFlow from './AlgoArchitectureFlow';
 
 export default function Experience() {
   const [sectionRef, isVisible] = useScrollReveal();
   const [algoViewMode, setAlgoViewMode] = useState('architecture'); // 'architecture' | 'tasks'
+  const { t, isRtl } = useLanguage();
+
+  const stages = t.experience.stages || experiences;
 
   return (
     <section id="experience" ref={sectionRef} className="py-24 relative overflow-hidden dark:bg-black bg-white">
@@ -20,24 +24,24 @@ export default function Experience() {
         <div className={`text-center max-w-3xl mx-auto space-y-4 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-wider uppercase bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/30">
             <Briefcase className="w-3.5 h-3.5 text-[#00783C]" />
-            Parcours & Architecture
+            {t.experience.badge}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold dark:text-white text-black tracking-tight">
-            Expériences Professionnelles
+            {t.experience.title}
           </h2>
           <p className="dark:text-neutral-300 text-neutral-700 text-sm sm:text-base leading-relaxed">
-            Mise en œuvre d'architectures Clean Architecture, déploiement d'agents RAG et développement d'applications d'entreprise robustes.
+            {t.experience.subtitle}
           </p>
         </div>
 
         {/* Timeline Container */}
         <div className="relative">
           {/* Vertical Line */}
-          <div className="hidden md:block absolute left-8 top-4 bottom-4 w-0.5 bg-gradient-to-b from-[#00783C] via-emerald-600 to-[#00783C]/30" />
+          <div className={`hidden md:block absolute ${isRtl ? 'right-8' : 'left-8'} top-4 bottom-4 w-0.5 bg-gradient-to-b from-[#00783C] via-emerald-600 to-[#00783C]/30`} />
 
           <div className="space-y-12">
-            {experiences.map((exp, index) => {
-              const isAlgo = exp.featured;
+            {stages.map((exp, index) => {
+              const isAlgo = index === 0;
 
               return (
                 <div
@@ -62,10 +66,10 @@ export default function Experience() {
                   }`}>
                     {/* Featured Ribbon for Algo Consulting */}
                     {isAlgo && (
-                      <div className="absolute top-0 right-0">
-                        <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-bl-xl text-[11px] font-mono font-bold uppercase tracking-wider bg-[#00783C] text-white shadow-md">
+                      <div className={`absolute top-0 ${isRtl ? 'left-0' : 'right-0'}`}>
+                        <span className={`inline-flex items-center gap-1.5 px-4 py-1.5 ${isRtl ? 'rounded-br-xl' : 'rounded-bl-xl'} text-[11px] font-mono font-bold uppercase tracking-wider bg-[#00783C] text-white shadow-md`}>
                           <Sparkles className="w-3.5 h-3.5" />
-                          Stage Clé IA & .NET
+                          {t.experience.featuredRibbon}
                         </span>
                       </div>
                     )}
@@ -101,7 +105,7 @@ export default function Experience() {
                         <div className="flex items-center justify-between border-b dark:border-neutral-800 border-neutral-200 pb-3 mb-4">
                           <span className="text-xs font-mono text-[#00783C] font-semibold flex items-center gap-1.5 uppercase">
                             <Workflow className="w-4 h-4 text-[#00783C]" />
-                            Visualisation Technique :
+                            {t.experience.techVisualization}
                           </span>
 
                           <div className="flex items-center gap-1.5 bg-neutral-100 dark:bg-neutral-900 p-1 rounded-xl border dark:border-neutral-800 border-neutral-200 text-xs font-medium">
@@ -114,7 +118,7 @@ export default function Experience() {
                               }`}
                             >
                               <Workflow className="w-3.5 h-3.5" />
-                              <span>Diagramme d'Architecture</span>
+                              <span>{t.experience.architectureDiagram}</span>
                             </button>
                             <button
                               onClick={() => setAlgoViewMode('tasks')}
@@ -125,7 +129,7 @@ export default function Experience() {
                               }`}
                             >
                               <ListFilter className="w-3.5 h-3.5" />
-                              <span>Missions & Détails</span>
+                              <span>{t.experience.missionsAndDetails}</span>
                             </button>
                           </div>
                         </div>
@@ -139,10 +143,10 @@ export default function Experience() {
                             {exp.achievements.map((item, aIdx) => (
                               <div key={aIdx} className="rounded-xl p-4 dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 space-y-1">
                                 <h4 className="text-xs sm:text-sm font-semibold dark:text-white text-black flex items-start gap-2">
-                                  <ChevronRight className="w-4 h-4 text-[#00783C] mt-0.5 shrink-0" />
+                                  <ChevronRight className={`w-4 h-4 text-[#00783C] mt-0.5 shrink-0 ${isRtl ? 'rotate-180' : ''}`} />
                                   <span>{item.title}</span>
                                 </h4>
-                                <p className="text-xs sm:text-sm dark:text-neutral-300 text-neutral-700 pl-6 leading-relaxed">
+                                <p className="text-xs sm:text-sm dark:text-neutral-300 text-neutral-700 pl-6 rtl:pl-0 rtl:pr-6 leading-relaxed">
                                   {item.detail}
                                 </p>
                               </div>
@@ -158,10 +162,10 @@ export default function Experience() {
                         {exp.achievements.map((item, aIdx) => (
                           <div key={aIdx} className="rounded-xl p-3.5 dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 space-y-1">
                             <h4 className="text-xs sm:text-sm font-semibold dark:text-white text-black flex items-start gap-2">
-                              <ChevronRight className="w-4 h-4 text-[#00783C] mt-0.5 shrink-0" />
+                              <ChevronRight className={`w-4 h-4 text-[#00783C] mt-0.5 shrink-0 ${isRtl ? 'rotate-180' : ''}`} />
                               <span>{item.title}</span>
                             </h4>
-                            <p className="text-xs sm:text-sm dark:text-neutral-300 text-neutral-700 pl-6 leading-relaxed">
+                            <p className="text-xs sm:text-sm dark:text-neutral-300 text-neutral-700 pl-6 rtl:pl-0 rtl:pr-6 leading-relaxed">
                               {item.detail}
                             </p>
                           </div>
@@ -171,7 +175,9 @@ export default function Experience() {
 
                     {/* Tech tags */}
                     <div className="flex flex-wrap items-center gap-2 pt-2 border-t dark:border-neutral-800 border-neutral-200">
-                      <span className="text-xs text-[#00783C] font-mono font-semibold mr-1">Stack :</span>
+                      <span className="text-xs text-[#00783C] font-mono font-semibold mr-1 rtl:mr-0 rtl:ml-1">
+                        {t.experience.stackLabel}
+                      </span>
                       {exp.techs.map((tech, tIdx) => (
                         <span
                           key={tIdx}
@@ -192,7 +198,7 @@ export default function Experience() {
         <div className={`mt-20 pt-12 border-t dark:border-neutral-800 border-neutral-200 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
           <div className="flex items-center gap-2 mb-8 justify-center">
             <GraduationCap className="w-6 h-6 text-[#00783C]" />
-            <h3 className="text-2xl font-bold dark:text-white text-black">Formation Académique</h3>
+            <h3 className="text-2xl font-bold dark:text-white text-black">{t.experience.educationTitle}</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

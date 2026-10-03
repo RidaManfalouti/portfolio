@@ -3,6 +3,7 @@ import { Mail, MapPin, Phone, Send, Check, Copy, MessageSquare } from 'lucide-re
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { personalInfo } from '../data/portfolioData';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Contact() {
   const [sectionRef, isVisible] = useScrollReveal();
@@ -14,6 +15,7 @@ export default function Contact() {
     message: '',
   });
   const [status, setStatus] = useState({ submitted: false, loading: false });
+  const { t, isRtl } = useLanguage();
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalInfo.email);
@@ -27,10 +29,13 @@ export default function Contact() {
 
     setTimeout(() => {
       setStatus({ submitted: true, loading: false });
+      const defaultSubject = isRtl ? 'تواصل عبر معرض الأعمال' : 'Prise de contact via Portfolio';
+      const greeting = isRtl ? 'مرحباً رضا،' : 'Bonjour Rida,';
+      const fromText = isRtl ? 'من :' : 'De :';
       const mailtoLink = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
-        formState.subject || 'Prise de contact via Portfolio'
+        formState.subject || defaultSubject
       )}&body=${encodeURIComponent(
-        `Bonjour Rida,\n\n${formState.message}\n\nDe : ${formState.name} (${formState.email})`
+        `${greeting}\n\n${formState.message}\n\n${fromText} ${formState.name} (${formState.email})`
       )}`;
       window.open(mailtoLink, '_blank');
       setFormState({ name: '', email: '', subject: '', message: '' });
@@ -48,13 +53,13 @@ export default function Contact() {
         <div className={`text-center max-w-2xl mx-auto space-y-4 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-wider uppercase bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/30">
             <MessageSquare className="w-3.5 h-3.5 text-[#00783C]" />
-            Entrons en contact
+            {t.contact.badge}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold dark:text-white text-black tracking-tight">
-            Discutons de vos projets
+            {t.contact.title}
           </h2>
           <p className="dark:text-neutral-300 text-neutral-700 text-sm sm:text-base leading-relaxed">
-            Vous avez un projet innovant, une opportunité de poste ou souhaitez échanger autour d'architectures Full Stack et d'IA ? Envoyez-moi un message.
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -65,17 +70,17 @@ export default function Contact() {
             
             {/* Info Card */}
             <div className="rounded-2xl p-6 glass-card border dark:border-neutral-800 border-neutral-200 shadow-sm space-y-6">
-              <h3 className="text-lg font-bold text-[#00783C]">Coordonnées Directes</h3>
+              <h3 className="text-lg font-bold text-[#00783C]">{t.contact.directContact}</h3>
               
               <div className="space-y-4">
                 {/* Email with copy button */}
                 <div className="p-4 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 flex items-center justify-between group shadow-xs">
-                  <div className="flex items-center space-x-3 truncate mr-2">
+                  <div className="flex items-center space-x-3 rtl:space-x-reverse truncate mr-2 rtl:mr-0 rtl:ml-2">
                     <div className="p-2.5 rounded-xl bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/20 shrink-0">
                       <Mail className="w-4 h-4 text-[#00783C]" />
                     </div>
                     <div className="truncate">
-                      <p className="text-[11px] font-mono font-semibold text-[#00783C] uppercase">Email</p>
+                      <p className="text-[11px] font-mono font-semibold text-[#00783C] uppercase">{t.contact.email}</p>
                       <a
                         href={`mailto:${personalInfo.email}`}
                         className="text-xs sm:text-sm font-medium dark:text-white text-black hover:text-[#00783C] transition-colors truncate block"
@@ -88,20 +93,20 @@ export default function Contact() {
                   <button
                     onClick={handleCopyEmail}
                     className="p-2 rounded-lg text-neutral-500 hover:text-[#00783C] dark:bg-neutral-900 bg-neutral-100 transition-colors shrink-0"
-                    title="Copier l'adresse email"
-                    aria-label="Copier l'email"
+                    title={isRtl ? 'نسخ البريد الإلكتروني' : "Copier l'adresse email"}
+                    aria-label={isRtl ? 'نسخ البريد الإلكتروني' : "Copier l'email"}
                   >
                     {copied ? <Check className="w-4 h-4 text-[#00783C]" /> : <Copy className="w-4 h-4" />}
                   </button>
                 </div>
 
                 {/* Location */}
-                <div className="p-4 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 flex items-center space-x-3 shadow-xs">
+                <div className="p-4 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 flex items-center space-x-3 rtl:space-x-reverse shadow-xs">
                   <div className="p-2.5 rounded-xl bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/20 shrink-0">
                     <MapPin className="w-4 h-4 text-[#00783C]" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-mono font-semibold text-[#00783C] uppercase">Localisation</p>
+                    <p className="text-[11px] font-mono font-semibold text-[#00783C] uppercase">{t.contact.location}</p>
                     <p className="text-xs sm:text-sm font-medium dark:text-white text-black">
                       {personalInfo.location}
                     </p>
@@ -109,12 +114,12 @@ export default function Contact() {
                 </div>
 
                 {/* Phone */}
-                <div className="p-4 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 flex items-center space-x-3 shadow-xs">
+                <div className="p-4 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 flex items-center space-x-3 rtl:space-x-reverse shadow-xs">
                   <div className="p-2.5 rounded-xl bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/20 shrink-0">
                     <Phone className="w-4 h-4 text-[#00783C]" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-mono font-semibold text-[#00783C] uppercase">Téléphone</p>
+                    <p className="text-[11px] font-mono font-semibold text-[#00783C] uppercase">{t.contact.phone}</p>
                     <a
                       href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`}
                       className="text-xs sm:text-sm font-medium dark:text-white text-black hover:text-[#00783C] transition-colors"
@@ -127,7 +132,7 @@ export default function Contact() {
 
               {/* Social networks block */}
               <div className="pt-2 border-t dark:border-neutral-800 border-neutral-200">
-                <p className="text-xs text-[#00783C] font-mono font-semibold mb-3">Réseaux professionnels :</p>
+                <p className="text-xs text-[#00783C] font-mono font-semibold mb-3">{t.contact.networks}</p>
                 <div className="grid grid-cols-2 gap-3">
                   <a
                     href={personalInfo.linkedin}
@@ -160,15 +165,15 @@ export default function Contact() {
                   <div className="w-14 h-14 mx-auto rounded-full bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/30 flex items-center justify-center">
                     <Check className="w-7 h-7 text-[#00783C]" />
                   </div>
-                  <h4 className="text-xl font-bold dark:text-white text-black">Message préparé avec succès !</h4>
+                  <h4 className="text-xl font-bold dark:text-white text-black">{t.contact.successTitle}</h4>
                   <p className="text-sm dark:text-neutral-300 text-neutral-700 max-w-md mx-auto">
-                    Votre client de messagerie s'est ouvert pour transmettre le message directement à Rida.
+                    {t.contact.successDesc}
                   </p>
                   <button
                     onClick={() => setStatus({ submitted: false, loading: false })}
                     className="mt-4 px-5 py-2 text-xs font-semibold text-white bg-[#00783C] hover:bg-[#006533] rounded-xl transition-colors"
                   >
-                    Envoyer un autre message
+                    {t.contact.sendAnother}
                   </button>
                 </div>
               ) : (
@@ -177,7 +182,7 @@ export default function Contact() {
                     {/* Name */}
                     <div className="space-y-1.5">
                       <label htmlFor="name" className="text-xs font-mono font-semibold text-[#00783C]">
-                        Votre nom <span className="text-[#00783C]">*</span>
+                        {t.contact.nameLabel} <span className="text-[#00783C]">*</span>
                       </label>
                       <input
                         id="name"
@@ -185,7 +190,7 @@ export default function Contact() {
                         required
                         value={formState.name}
                         onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                        placeholder="ex: Jean Dupont"
+                        placeholder={t.contact.namePlaceholder}
                         className="w-full px-3.5 py-2.5 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-300 focus:border-[#00783C] focus:ring-1 focus:ring-[#00783C] text-sm dark:text-white text-black placeholder-neutral-400 outline-none transition-all"
                       />
                     </div>
@@ -193,7 +198,7 @@ export default function Contact() {
                     {/* Email */}
                     <div className="space-y-1.5">
                       <label htmlFor="email" className="text-xs font-mono font-semibold text-[#00783C]">
-                        Votre email <span className="text-[#00783C]">*</span>
+                        {t.contact.emailLabel} <span className="text-[#00783C]">*</span>
                       </label>
                       <input
                         id="email"
@@ -201,7 +206,7 @@ export default function Contact() {
                         required
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                        placeholder="jean.dupont@example.com"
+                        placeholder={t.contact.emailPlaceholder}
                         className="w-full px-3.5 py-2.5 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-300 focus:border-[#00783C] focus:ring-1 focus:ring-[#00783C] text-sm dark:text-white text-black placeholder-neutral-400 outline-none transition-all"
                       />
                     </div>
@@ -210,14 +215,14 @@ export default function Contact() {
                   {/* Subject */}
                   <div className="space-y-1.5">
                     <label htmlFor="subject" className="text-xs font-mono font-semibold text-[#00783C]">
-                      Sujet
+                      {t.contact.subjectLabel}
                     </label>
                     <input
                       id="subject"
                       type="text"
                       value={formState.subject}
                       onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                      placeholder="Opportunité de poste / Collaboration projet"
+                      placeholder={t.contact.subjectPlaceholder}
                       className="w-full px-3.5 py-2.5 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-300 focus:border-[#00783C] focus:ring-1 focus:ring-[#00783C] text-sm dark:text-white text-black placeholder-neutral-400 outline-none transition-all"
                     />
                   </div>
@@ -225,7 +230,7 @@ export default function Contact() {
                   {/* Message */}
                   <div className="space-y-1.5">
                     <label htmlFor="message" className="text-xs font-mono font-semibold text-[#00783C]">
-                      Message <span className="text-[#00783C]">*</span>
+                      {t.contact.messageLabel} <span className="text-[#00783C]">*</span>
                     </label>
                     <textarea
                       id="message"
@@ -233,7 +238,7 @@ export default function Contact() {
                       required
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                      placeholder="Décrivez votre besoin, projet ou offre..."
+                      placeholder={t.contact.messagePlaceholder}
                       className="w-full px-3.5 py-2.5 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-300 focus:border-[#00783C] focus:ring-1 focus:ring-[#00783C] text-sm dark:text-white text-black placeholder-neutral-400 outline-none transition-all resize-none"
                     />
                   </div>
@@ -248,8 +253,8 @@ export default function Contact() {
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     ) : (
                       <>
-                        <Send className="w-4 h-4" />
-                        <span>Envoyer le message</span>
+                        <Send className={`w-4 h-4 ${isRtl ? 'rotate-180' : ''}`} />
+                        <span>{t.contact.sendBtn}</span>
                       </>
                     )}
                   </button>

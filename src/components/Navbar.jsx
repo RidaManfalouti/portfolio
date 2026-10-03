@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileText, Sun, Moon } from 'lucide-react';
+import { Menu, X, FileText, Sun, Moon, Globe } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { personalInfo } from '../data/portfolioData';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const { theme, toggleTheme } = useTheme();
+  const { language, setLanguage, t, isRtl } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,11 +37,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Accueil', href: '#hero', id: 'hero' },
-    { name: 'Compétences', href: '#skills', id: 'skills' },
-    { name: 'Expériences & Architecture', href: '#experience', id: 'experience' },
-    { name: 'Projets', href: '#projects', id: 'projects' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: t.nav.home, href: '#hero', id: 'hero' },
+    { name: t.nav.skills, href: '#skills', id: 'skills' },
+    { name: t.nav.experience, href: '#experience', id: 'experience' },
+    { name: t.nav.projects, href: '#projects', id: 'projects' },
+    { name: t.nav.contact, href: '#contact', id: 'contact' },
   ];
 
   return (
@@ -56,7 +58,7 @@ export default function Navbar() {
           {/* Brand Logo */}
           <a
             href="#hero"
-            className="group flex items-center space-x-3 dark:text-white text-black font-bold text-xl tracking-tight"
+            className="group flex items-center space-x-3 rtl:space-x-reverse dark:text-white text-black font-bold text-xl tracking-tight"
           >
             <div className="w-10 h-10 rounded-xl bg-[#00783C] p-[1.5px] transition-transform duration-300 group-hover:scale-105 shadow-sm">
               <div className="w-full h-full dark:bg-black bg-white rounded-[10px] flex items-center justify-center">
@@ -71,13 +73,13 @@ export default function Navbar() {
                 <span className="inline-block w-2 h-2 rounded-full bg-[#00783C] animate-pulse"></span>
               </span>
               <span className="text-[11px] text-[#00783C] font-mono font-semibold hidden sm:inline">
-                Full Stack & IA Engineer
+                {t.nav.role}
               </span>
             </div>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 bg-transparent p-1">
+          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 rtl:space-x-reverse bg-transparent p-1">
             {navLinks.map((link) => (
               <a
                 key={link.id}
@@ -93,15 +95,37 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Right Action Icons, Dark/Light Mode & CTA */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Right Action Icons, Language Selector, Dark/Light Mode & CTA */}
+          <div className="hidden md:flex items-center space-x-2 rtl:space-x-reverse">
             
+            {/* Language Selector (FR | EN | AR) */}
+            <div className="flex items-center p-0.5 rounded-xl dark:bg-neutral-900 bg-neutral-100 border dark:border-neutral-800 border-neutral-200 text-xs font-semibold">
+              {[
+                { code: 'fr', label: 'FR' },
+                { code: 'en', label: 'EN' },
+                { code: 'ar', label: 'عربي' },
+              ].map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => setLanguage(lang.code)}
+                  className={`px-2 py-1 rounded-lg transition-all text-[11px] font-bold ${
+                    language === lang.code
+                      ? 'bg-[#00783C] text-white shadow-xs'
+                      : 'dark:text-neutral-400 text-neutral-600 hover:text-black dark:hover:text-white'
+                  }`}
+                  title={`Passer en ${lang.label}`}
+                >
+                  {lang.label}
+                </button>
+              ))}
+            </div>
+
             {/* Functional Dark/Light Mode Toggle */}
             <button
               onClick={toggleTheme}
-              aria-label={theme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre'}
+              aria-label={theme === 'dark' ? t.nav.lightMode : t.nav.darkMode}
               className="p-2 rounded-xl text-[#00783C] hover:bg-[#00783C]/10 border border-transparent hover:border-[#00783C]/30 transition-all duration-200 hover:scale-105"
-              title={theme === 'dark' ? 'Mode Clair' : 'Mode Sombre'}
+              title={theme === 'dark' ? t.nav.lightMode : t.nav.darkMode}
             >
               {theme === 'dark' ? (
                 <Sun className="w-4 h-4 transition-transform duration-300 rotate-0 hover:rotate-45" />
@@ -139,16 +163,33 @@ export default function Navbar() {
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-[#00783C] bg-transparent hover:bg-[#00783C] hover:text-white border border-[#00783C] rounded-xl transition-all shadow-xs"
             >
               <FileText className="w-3.5 h-3.5" />
-              <span>CV</span>
+              <span>{t.nav.cv}</span>
             </a>
           </div>
 
-          {/* Mobile Actions: Dark/Light Mode + Hamburger Menu */}
-          <div className="flex md:hidden items-center gap-2">
+          {/* Mobile Actions: Language + Dark/Light + Hamburger Menu */}
+          <div className="flex md:hidden items-center gap-1.5">
+            {/* Mobile Language Selector */}
+            <div className="flex items-center p-0.5 rounded-xl dark:bg-neutral-900 bg-neutral-100 border dark:border-neutral-800 border-neutral-200 text-xs font-semibold">
+              {['fr', 'en', 'ar'].map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => setLanguage(lang)}
+                  className={`px-1.5 py-0.5 rounded-lg text-[10px] font-bold uppercase ${
+                    language === lang
+                      ? 'bg-[#00783C] text-white'
+                      : 'dark:text-neutral-400 text-neutral-600'
+                  }`}
+                >
+                  {lang}
+                </button>
+              ))}
+            </div>
+
             <button
               onClick={toggleTheme}
-              aria-label={theme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre'}
-              className="p-2 rounded-xl text-[#00783C] bg-transparent hover:bg-[#00783C]/10 border border-[#00783C]/30 text-xs"
+              aria-label={theme === 'dark' ? t.nav.lightMode : t.nav.darkMode}
+              className="p-1.5 rounded-xl text-[#00783C] bg-transparent hover:bg-[#00783C]/10 border border-[#00783C]/30 text-xs"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
@@ -156,14 +197,14 @@ export default function Navbar() {
             <a
               href={personalInfo.cvPath}
               download="CV_Rida_MANFALOUTI.pdf"
-              className="p-2 text-[#00783C] bg-transparent hover:bg-[#00783C] hover:text-white border border-[#00783C] rounded-xl text-xs flex items-center gap-1 transition-colors"
+              className="p-1.5 text-[#00783C] bg-transparent hover:bg-[#00783C] hover:text-white border border-[#00783C] rounded-xl text-xs flex items-center gap-1 transition-colors"
             >
-              <FileText className="w-4 h-4" />
+              <FileText className="w-3.5 h-3.5" />
             </a>
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-xl dark:text-white text-black hover:text-[#00783C] hover:bg-[#00783C]/10 transition-colors focus:outline-none"
+              className="p-1.5 rounded-xl dark:text-white text-black hover:text-[#00783C] hover:bg-[#00783C]/10 transition-colors focus:outline-none"
               aria-label="Basculer le menu"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -212,7 +253,7 @@ export default function Navbar() {
                 download="CV_Rida_MANFALOUTI.pdf"
                 className="flex items-center gap-1.5 text-sm text-[#00783C] font-semibold"
               >
-                <FileText className="w-4 h-4" /> CV
+                <FileText className="w-4 h-4" /> {t.nav.cv}
               </a>
             </div>
           </nav>
