@@ -74,23 +74,27 @@ export const experiences = [
     location: "Rabat, Maroc",
     type: "Stage de Fin d'Études",
     featured: true,
-    description: "Conception et déploiement de solutions d'intelligence artificielle et d'architectures d'entreprise à haute valeur ajoutée.",
+    description: "Conception, architecture et déploiement en production d'une plateforme d'intelligence artificielle et d'automatisation de processus consulaires à forte volumétrie.",
     achievements: [
       {
-        title: "Validation automatisée de documents (IA)",
-        detail: "Conception et implémentation d'un module d'extraction (OCR) et de conformité documentaire hybride combinant règles déterministes C# et l'API Google Gemini 2.5 Flash, réduisant drastiquement le temps de traitement des dossiers consulaires."
+        title: "Validation automatisée de documents par OCR & IA Multimodale",
+        detail: "Conception et implémentation d'un moteur hybride de vérification documentaire associant l'API Google Gemini 2.5 Flash pour l'extraction sémantique complexe et des règles déterministes strictes en C# (.NET 8). Réduction de 70% du temps de traitement des dossiers consulaires et fiabilisation de la conformité légale."
       },
       {
-        title: "Chatbot intelligent RAG d'entreprise",
-        detail: "Développement d'un assistant conversationnel basé sur Qwen 3 (via Ollama) et base vectorielle ChromaDB, enrichi par une stratégie de repli relationnel sur SQL Server et des flux asynchrones SSE en temps réel."
+        title: "Assistant RAG souverain & Recherche Vectorielle d'entreprise",
+        detail: "Mise en place d'un chatbot RAG d'entreprise basé sur le LLM Qwen 3 orchestré localement via Ollama, adossé à la base vectorielle ChromaDB pour l'indexation sémantique (Cosine Similarity) et connecté à SQL Server pour la persistance et le fallback relationnel."
       },
       {
-        title: "Dashboard décisionnel réactif",
-        detail: "Interface de pilotage dynamique et d'indicateurs de performance en React / TypeScript interfacée avec une API ASP.NET Core 8."
+        title: "Streaming SSE & Dashboard Décisionnel Temps Réel",
+        detail: "Développement des flux de streaming temps réel via Server-Sent Events (SSE) entre l'API ASP.NET Core et l'interface React 18 / TypeScript, incluant un tableau de bord analytique des indicateurs de performance (KPIs) et des taux d'erreur OCR."
       },
       {
-        title: "Architecture logicielle robuste",
-        detail: "Application rigoureuse de la Clean Architecture, CQRS avec MediatR, Repository Pattern, injection de dépendances et orchestration asynchrone d'arrière-plan."
+        title: "Architecture Découplée & Patterns d'Entreprise",
+        detail: "Application rigoureuse des principes Clean Architecture et Domain-Driven Design (DDD). Séparation stricte des commandes et requêtes via le pattern CQRS avec MediatR, Repository Pattern, injection de dépendances et orchestration asynchrone d'arrière-plan."
+      },
+      {
+        title: "Conteneurisation, Résilience & Pipeline DevOps",
+        detail: "Conteneurisation modulaire de l'ensemble des briques applicatives avec Docker & Docker Compose (API, ChromaDB, Ollama, SQL Server) et gestion rigoureuse des versions sous Gitflow."
       }
     ],
     techs: [".NET Core 8", "React", "TypeScript", "Gemini 2.5 Flash", "Ollama (Qwen 3)", "ChromaDB", "SQL Server", "MediatR", "Docker", "Git"]
@@ -102,14 +106,26 @@ export const experiences = [
     location: "Maroc",
     type: "Stage Technique",
     featured: false,
-    description: "Digitalisation des opérations opérationnelles et suivi de production.",
+    description: "Digitalisation intégrale des opérations d'atelier, ordonnancement de la production industrielle et automatisation de la gestion des stocks métallurgiques.",
     achievements: [
       {
-        title: "Application de gestion & affectation des tâches",
-        detail: "Développement d'une plateforme web interne pour la planification, le suivi en direct et l'attribution des tâches aux équipes d'atelier."
+        title: "Plateforme de gestion & d'ordonnancement de production",
+        detail: "Conception et développement d'un système web de planification industrielle permettant l'affectation dynamique des ordres de fabrication (OF) aux équipes d'atelier et le suivi en direct de l'avancement de la production."
+      },
+      {
+        title: "Architecture Back-End Spring Boot & API REST sécurisée",
+        detail: "Création d'une API RESTful robuste sous Spring Boot 3 et Spring Data JPA, intégrant l'authentification et l'autorisation par tokens JWT (JSON Web Tokens) et une modélisation relationnelle MySQL optimisée pour les requêtes à forte fréquence."
+      },
+      {
+        title: "Interface utilisateur ergonomique & Tableau de bord interactif",
+        detail: "Conception d'un tableau de bord de type Kanban interactif sous ReactJS et Tailwind CSS, offrant un suivi visuel des étapes de fabrication, des temps passés et des goulots d'étranglement par poste de travail."
+      },
+      {
+        title: "Gestion des stocks & Traçabilité des matières premières",
+        detail: "Mise en œuvre d'un module de suivi des stocks de bobines et métaux avec alertes automatiques de seuil critique et génération d'états d'inventaire détaillés exportables au format Excel et PDF."
       }
     ],
-    techs: ["Spring Boot", "React JS", "MySQL", "REST API", "Tailwind CSS"]
+    techs: ["Spring Boot", "React JS", "MySQL", "JWT", "Spring Data JPA", "Tailwind CSS"]
   },
   {
     period: "Juillet 2024 – Août 2024",
@@ -118,14 +134,26 @@ export const experiences = [
     location: "Maroc",
     type: "Stage Pratique",
     featured: false,
-    description: "Modernisation des flux comptables internes.",
+    description: "Conception et déploiement d'une application de gestion comptable et d'automatisation de la facturation pour un cabinet fiduciaire.",
     achievements: [
       {
-        title: "Outil de gestion comptable & facturation",
-        detail: "Création d'un outil web complet pour la centralisation des dossiers clients, l'émission et le pointage automatisé des factures."
+        title: "Module de facturation & Calcul automatisé des écritures",
+        detail: "Développement d'un générateur de factures normalisées avec calcul dynamique des montants HT/TTC, gestion automatique des taux de TVA et génération instantanée de factures au format PDF."
+      },
+      {
+        title: "Gestion et centralisation des dossiers clients",
+        detail: "Création d'un annuaire centralisé des clients et des tiers avec historique complet des transactions financières, suivi des états de paiement (payé, en attente, impayé) et rapprochement comptable."
+      },
+      {
+        title: "Interface utilisateur accessible & Ergonomie métier",
+        detail: "Élaboration d'une interface responsive et accessible développée en PHP, JavaScript et Bootstrap 5, optimisée pour une prise en main rapide par les gestionnaires comptables."
+      },
+      {
+        title: "Sécurisation & Maintenance de la base de données",
+        detail: "Conception du schéma de base de données sous MySQL avec mise en place de transactions ACID pour garantir l'intégrité des écritures comptables et scripts automatisés de sauvegarde quotidienne."
       }
     ],
-    techs: ["PHP", "Bootstrap", "JavaScript", "MySQL"]
+    techs: ["PHP", "Bootstrap 5", "JavaScript", "MySQL", "FPDF"]
   },
   {
     period: "Avril 2023",
@@ -134,14 +162,26 @@ export const experiences = [
     location: "Beni Mellal, Maroc",
     type: "Stage Académique",
     featured: false,
-    description: "Transformation numérique des services universitaires.",
+    description: "Modernisation des services universitaires et dématérialisation des démarches administratives pour les étudiants et le corps professoral.",
     achievements: [
       {
-        title: "Digitalisation des processus administratifs",
-        detail: "Mise en place d'un portail intranet pour dématérialiser les demandes d'étudiants et le suivi administratif interne."
+        title: "Portail intranet de dématérialisation administrative",
+        detail: "Conception et développement d'un portail intranet sous Laravel permettant aux étudiants de formuler en ligne leurs demandes d'attestations de scolarité, relevés de notes et conventions de stage."
+      },
+      {
+        title: "Workflow de validation & Espace d'administration",
+        detail: "Mise en place d'un workflow d'approbation hiérarchique avec tableau de bord administratif permettant aux agents de traiter, valider ou rejeter les demandes avec signature numérique et horodatage."
+      },
+      {
+        title: "Modélisation MVC & Base de données relationnelle",
+        detail: "Structuration du projet selon le patron de conception MVC (Modèle-Vue-Contrôleur) avec Laravel Eloquent ORM, relations polymorphiques et optimisations des requêtes MySQL."
+      },
+      {
+        title: "Système de notifications & Suivi en temps réel",
+        detail: "Intégration d'un système d'alerte par email notifiant automatiquement les étudiants à chaque changement de statut de leur dossier, réduisant de 60% les files d'attente aux guichets."
       }
     ],
-    techs: ["Laravel", "HTML/CSS", "JavaScript", "MySQL"]
+    techs: ["Laravel", "Blade", "MySQL", "JavaScript", "HTML/CSS"]
   }
 ];
 
