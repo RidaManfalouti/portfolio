@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Download, Terminal, Code2, Cpu, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Download, Code2, Cpu, CheckCircle2, GraduationCap, Terminal } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 import { personalInfo } from '../data/portfolioData';
 
@@ -118,68 +118,93 @@ export default function Hero() {
 
           </div>
 
-          {/* Right Visual Tech Terminal / Card */}
+          {/* Right Visual Profile Card (Professional Explanatory Card) */}
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
               {/* Decorative Glow Border */}
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#00783C] to-emerald-500 opacity-20 blur-lg transition duration-500" />
 
-              {/* IDE Code Card */}
-              <div className="relative rounded-2xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 shadow-2xl p-5 sm:p-6 overflow-hidden">
-                {/* Header Window controls */}
+              {/* Profile Presentation Card */}
+              <div className="relative rounded-2xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 shadow-2xl p-6 sm:p-7 overflow-hidden space-y-5">
+                
+                {/* Header Badge */}
                 <div className="flex items-center justify-between pb-4 border-b dark:border-neutral-800 border-neutral-200">
-                  <div className="flex items-center space-x-2">
-                    <span className="w-3 h-3 rounded-full bg-rose-500 inline-block" />
-                    <span className="w-3 h-3 rounded-full bg-amber-500 inline-block" />
-                    <span className="w-3 h-3 rounded-full bg-[#00783C] inline-block" />
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-[#00783C] text-white shadow-sm">
+                      <GraduationCap className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#00783C] block">
+                        Profil Ingénieur d'État
+                      </span>
+                      <h3 className="text-base sm:text-lg font-bold dark:text-white text-black leading-tight">
+                        EMSI Rabat — Promotion 2026
+                      </h3>
+                    </div>
                   </div>
-                  <div className="text-[11px] font-mono font-semibold text-[#00783C] flex items-center gap-1.5">
-                    <Terminal className="w-3.5 h-3.5 text-[#00783C]" />
-                    rida-manfalouti.cs
-                  </div>
-                </div>
-
-                {/* Code Snapshot */}
-                <div className="mt-4 font-mono text-xs sm:text-[13px] leading-relaxed space-y-1.5 dark:text-white text-black">
-                  <p className="text-[#00783C] font-semibold">{"// Architecture & IA Engine"}</p>
-                  <p>
-                    <span className="text-[#00783C] font-semibold">public class</span> <span className="font-bold dark:text-white text-black">RidaEngineer</span> : <span className="text-[#00783C]">IFullStackAI</span>
-                  </p>
-                  <p>{"{"}</p>
-                  <p className="pl-4">
-                    <span className="text-[#00783C] font-semibold">public string</span> Education <span className="text-neutral-400">=&gt;</span> <span className="dark:text-neutral-200 text-neutral-800 font-medium">"EMSI Rabat (2026)"</span>;
-                  </p>
-                  <p className="pl-4">
-                    <span className="text-[#00783C] font-semibold">public string[]</span> CoreStack <span className="text-neutral-400">=&gt;</span> [
-                  </p>
-                  <p className="pl-8 text-[#00783C] font-medium">
-                    "Spring Boot", ".NET Core 8", "React", "TypeScript"
-                  </p>
-                  <p className="pl-4">];</p>
-                  <p className="pl-4">
-                    <span className="text-[#00783C] font-semibold">public string[]</span> AIExpertise <span className="text-neutral-400">=&gt;</span> [
-                  </p>
-                  <p className="pl-8 text-[#00783C] font-medium">
-                    "RAG Pipeline", "Ollama Qwen 3", "Gemini 2.5", "ChromaDB"
-                  </p>
-                  <p className="pl-4">];</p>
-                  <p className="pl-4">
-                    <span className="text-[#00783C] font-semibold">public bool</span> ReadyToBuild <span className="text-neutral-400">=&gt;</span> <span className="text-[#00783C] font-bold">true</span>;
-                  </p>
-                  <p>{"}"}</p>
-                </div>
-
-                {/* Floating Metric Badge */}
-                <div className="mt-5 pt-4 border-t dark:border-neutral-800 border-neutral-200 flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2 text-[#00783C] font-semibold">
-                    <CheckCircle2 className="w-4 h-4 text-[#00783C]" />
-                    <span>Clean Code & CQRS</span>
-                  </div>
-                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/30">
-                    .NET 8 & React
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/30">
+                    Bac + 5
                   </span>
                 </div>
+
+                {/* Professional Explanatory Paragraph for Young Graduate */}
+                <div className="space-y-3">
+                  <p className="text-xs sm:text-sm dark:text-neutral-300 text-neutral-700 leading-relaxed">
+                    Fraîchement diplômé en <strong className="dark:text-white text-black font-semibold">Ingénierie Informatique et Réseaux à l'EMSI Rabat</strong>, j’allie la rigueur académique du génie logiciel aux exigences concrètes des architectures d’entreprise modernes.
+                  </p>
+                  <p className="text-xs sm:text-sm dark:text-neutral-300 text-neutral-700 leading-relaxed">
+                    Spécialisé en écosystèmes <strong className="text-[#00783C] font-semibold">Full Stack</strong> (.NET Core, Spring Boot, React) et en intégration d’<strong className="text-[#00783C] font-semibold">Intelligence Artificielle</strong> (RAG, LLM souverains, OCR multimodal), je privilégie la <strong className="dark:text-white text-black font-semibold">Clean Architecture</strong> et les principes <strong className="dark:text-white text-black font-semibold">CQRS</strong> pour concevoir des solutions modulaires, testables et scalables.
+                  </p>
+                </div>
+
+                {/* Key Strengths Grid */}
+                <div className="grid grid-cols-2 gap-2.5 pt-1">
+                  <div className="p-3 rounded-xl dark:bg-neutral-950 bg-neutral-50 border dark:border-neutral-800 border-neutral-200">
+                    <span className="text-[10px] font-mono font-bold uppercase text-[#00783C] block mb-0.5">
+                      Stack Backend & Web
+                    </span>
+                    <span className="text-xs font-semibold dark:text-white text-black">
+                      .NET 8, Spring & React
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl dark:bg-neutral-950 bg-neutral-50 border dark:border-neutral-800 border-neutral-200">
+                    <span className="text-[10px] font-mono font-bold uppercase text-[#00783C] block mb-0.5">
+                      Ingénierie IA
+                    </span>
+                    <span className="text-xs font-semibold dark:text-white text-black">
+                      RAG, Ollama & Gemini
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl dark:bg-neutral-950 bg-neutral-50 border dark:border-neutral-800 border-neutral-200">
+                    <span className="text-[10px] font-mono font-bold uppercase text-[#00783C] block mb-0.5">
+                      Architectures
+                    </span>
+                    <span className="text-xs font-semibold dark:text-white text-black">
+                      Clean Architecture, CQRS
+                    </span>
+                  </div>
+                  <div className="p-3 rounded-xl dark:bg-neutral-950 bg-neutral-50 border dark:border-neutral-800 border-neutral-200">
+                    <span className="text-[10px] font-mono font-bold uppercase text-[#00783C] block mb-0.5">
+                      Disponibilité
+                    </span>
+                    <span className="text-xs font-semibold dark:text-white text-black">
+                      Immédiate pour CDI
+                    </span>
+                  </div>
+                </div>
+
+                {/* Bottom Card Footer */}
+                <div className="pt-3 border-t dark:border-neutral-800 border-neutral-200 flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-1.5 text-[#00783C] font-semibold">
+                    <CheckCircle2 className="w-4 h-4 text-[#00783C]" />
+                    <span>Prêt à contribuer dès le jour 1</span>
+                  </div>
+                  <span className="text-[11px] font-mono font-semibold dark:text-neutral-400 text-neutral-600">
+                    Mobilité nationale & remote
+                  </span>
+                </div>
+
               </div>
 
             </div>
