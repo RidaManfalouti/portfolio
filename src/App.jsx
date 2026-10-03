@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 
 export default function App() {
   return (
-    <div className="min-h-screen dark:bg-dark-950 bg-slate-50 dark:text-slate-100 text-slate-900 flex flex-col font-sans transition-colors duration-300 selection:bg-cyan-500/30 selection:text-cyan-600 dark:selection:text-cyan-200">
+    <div className="min-h-screen dark:bg-black bg-white dark:text-white text-black flex flex-col font-sans transition-colors duration-300 selection:bg-[#00783C]/30 selection:text-[#00783C]">
       {/* Top Sticky Navbar with Dark/Light Toggle */}
       <Navbar />
 

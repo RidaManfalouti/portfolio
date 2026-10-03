@@ -5,12 +5,9 @@ import {
   Workflow,
   ArrowDown,
   Info,
-  CheckCircle2,
   Zap,
   ChevronDown,
   ChevronUp,
-  Sparkles,
-  ExternalLink
 } from 'lucide-react';
 import { projectArchitectures } from '../data/projectArchitectures';
 
@@ -69,7 +66,7 @@ export default function ProjectArchitectureModal({ initialProjectId, isOpen, onC
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-dark-950/80 backdrop-blur-md transition-opacity"
+          className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
         />
 
         {/* Modal Window Container */}
@@ -78,30 +75,30 @@ export default function ProjectArchitectureModal({ initialProjectId, isOpen, onC
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-5xl rounded-3xl dark:bg-dark-900 bg-white border dark:border-cyan-500/40 border-cyan-500/30 shadow-2xl p-5 sm:p-8 max-h-[92vh] overflow-y-auto z-10"
+          className="relative w-full max-w-5xl rounded-3xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 shadow-2xl p-5 sm:p-8 max-h-[92vh] overflow-y-auto z-10"
         >
           {/* Top Bar with Project Switcher & Close */}
-          <div className="flex items-start justify-between gap-4 pb-6 border-b dark:border-slate-800 border-slate-200">
+          <div className="flex items-start justify-between gap-4 pb-6 border-b dark:border-neutral-800 border-neutral-200">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="p-1.5 rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-500 text-white shadow-sm">
+                <span className="p-1.5 rounded-lg bg-[#00783C] text-white shadow-sm">
                   <Workflow className="w-4 h-4" />
                 </span>
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-500">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#00783C]">
                   Explorateur d'Architecture Technique
                 </span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-extrabold dark:text-white text-slate-900">
+              <h3 className="text-xl sm:text-2xl font-extrabold dark:text-white text-black">
                 {currentArch.title}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+              <p className="text-xs sm:text-sm text-[#00783C] font-semibold mt-0.5">
                 {currentArch.subtitle}
               </p>
             </div>
 
             <button
               onClick={onClose}
-              className="p-2.5 rounded-full dark:text-slate-400 text-slate-500 hover:text-white hover:bg-slate-800 transition-colors shrink-0"
+              className="p-2.5 rounded-full dark:text-neutral-400 text-neutral-600 hover:text-[#00783C] transition-colors shrink-0"
               aria-label="Fermer"
             >
               <X className="w-5 h-5" />
@@ -109,8 +106,8 @@ export default function ProjectArchitectureModal({ initialProjectId, isOpen, onC
           </div>
 
           {/* Quick Project Switcher Pills */}
-          <div className="py-4 border-b dark:border-slate-800/80 border-slate-200">
-            <span className="text-[11px] font-mono dark:text-slate-400 text-slate-500 uppercase tracking-wider block mb-2">
+          <div className="py-4 border-b dark:border-neutral-800 border-neutral-200">
+            <span className="text-[11px] font-mono text-[#00783C] font-semibold uppercase tracking-wider block mb-2">
               Changer de projet :
             </span>
             <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
@@ -121,10 +118,10 @@ export default function ProjectArchitectureModal({ initialProjectId, isOpen, onC
                     setSelectedProjectId(proj.id);
                     setActiveNodeId(null);
                   }}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                     selectedProjectId === proj.id
-                      ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-cyan-500/25'
-                      : 'dark:bg-dark-950 bg-slate-100 dark:text-slate-400 text-slate-600 hover:text-slate-900 dark:hover:text-white border dark:border-slate-800 border-slate-200'
+                      ? 'bg-[#00783C] text-white shadow-md shadow-[#00783C]/25'
+                      : 'dark:bg-black bg-neutral-100 dark:text-neutral-300 text-neutral-700 hover:text-black dark:hover:text-white border dark:border-neutral-800 border-neutral-200 hover:border-[#00783C]'
                   }`}
                 >
                   {proj.title}
@@ -134,21 +131,19 @@ export default function ProjectArchitectureModal({ initialProjectId, isOpen, onC
           </div>
 
           {/* Pipeline flow summary banner */}
-          <div className="mt-4 p-3 rounded-xl dark:bg-cyan-950/40 bg-cyan-50/80 border dark:border-cyan-900/60 border-cyan-200 flex items-center gap-2">
-            <Zap className="w-4 h-4 text-cyan-500 shrink-0" />
-            <p className="text-xs font-mono dark:text-cyan-300 text-cyan-900 truncate">
+          <div className="mt-4 p-3 rounded-xl bg-[#00783C]/10 border border-[#00783C]/30 flex items-center gap-2">
+            <Zap className="w-4 h-4 text-[#00783C] shrink-0" />
+            <p className="text-xs font-mono text-[#00783C] font-semibold truncate">
               <span className="font-bold">Flux Global :</span> {currentArch.flowSummary}
             </p>
           </div>
 
-          {/* ============================================================== */}
-          {/* DESKTOP FLOWCHART VIEW                                         */}
-          {/* ============================================================== */}
+          {/* DESKTOP FLOWCHART VIEW */}
           <div className="hidden md:block mt-6 space-y-6">
             {currentArch.layers.map((layer, lIdx) => (
               <div key={lIdx} className="space-y-4">
-                <div className="text-xs font-mono font-semibold uppercase tracking-wider dark:text-cyan-400 text-cyan-600 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-cyan-500 inline-block" />
+                <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#00783C] flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#00783C] inline-block" />
                   <span>{layer.name}</span>
                 </div>
 
@@ -174,11 +169,11 @@ export default function ProjectArchitectureModal({ initialProjectId, isOpen, onC
                 {/* Down connector if not the last layer */}
                 {layer.connectorText && (
                   <div className="flex flex-col items-center my-2">
-                    <div className="px-3 py-0.5 rounded-full text-[10px] font-mono dark:bg-slate-900 bg-slate-100 dark:text-cyan-400 text-cyan-700 border dark:border-cyan-900/50 border-cyan-300 shadow-sm">
+                    <div className="px-3 py-0.5 rounded-full text-[10px] font-mono bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/30 font-semibold shadow-sm">
                       {layer.connectorText}
                     </div>
-                    <div className="w-0.5 h-5 bg-gradient-to-b from-cyan-500 to-blue-500" />
-                    <ArrowDown className="w-3.5 h-3.5 text-blue-500 -mt-1" />
+                    <div className="w-0.5 h-5 bg-[#00783C]" />
+                    <ArrowDown className="w-3.5 h-3.5 text-[#00783C] -mt-1" />
                   </div>
                 )}
               </div>
@@ -190,38 +185,38 @@ export default function ProjectArchitectureModal({ initialProjectId, isOpen, onC
                 key={activeNode.id}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-6 p-5 rounded-2xl dark:bg-dark-950 bg-slate-50 border-2 dark:border-cyan-500/40 border-cyan-500/30 shadow-lg"
+                className="mt-6 p-5 rounded-2xl dark:bg-black bg-white border-2 border-[#00783C] shadow-lg"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className={`p-2 rounded-xl bg-gradient-to-tr ${activeNode.color} text-white shadow-sm`}>
+                  <div className="p-2 rounded-xl bg-[#00783C] text-white shadow-sm">
                     <activeNode.icon className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h4 className="text-lg font-bold dark:text-white text-slate-900">
+                      <h4 className="text-lg font-bold dark:text-white text-black">
                         {activeNode.name}
                       </h4>
-                      <span className="text-[11px] font-mono px-2 py-0.5 rounded-md dark:bg-slate-800 bg-slate-200 dark:text-cyan-400 text-cyan-700 font-semibold">
+                      <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-[#00783C]/10 text-[#00783C] font-semibold border border-[#00783C]/20">
                         {activeNode.badge}
                       </span>
                     </div>
-                    <p className="text-xs font-mono dark:text-slate-400 text-slate-500">
+                    <p className="text-xs font-mono text-[#00783C] font-semibold">
                       Rôle : {activeNode.role}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl dark:bg-dark-900 bg-white border dark:border-slate-800 border-slate-200 mb-3">
-                  <p className="text-xs sm:text-sm font-semibold dark:text-cyan-300 text-cyan-900 leading-snug">
+                <div className="p-3 rounded-xl dark:bg-neutral-900 bg-neutral-50 border dark:border-neutral-800 border-neutral-200 mb-3">
+                  <p className="text-xs sm:text-sm font-semibold text-[#00783C] leading-snug">
                     "{activeNode.tooltip}"
                   </p>
                 </div>
 
                 <div className="space-y-1">
-                  <span className="text-xs font-mono font-bold dark:text-slate-300 text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
-                    <Info className="w-3.5 h-3.5 text-cyan-500" /> Comment & Pourquoi dans ce projet :
+                  <span className="text-xs font-mono font-bold text-[#00783C] uppercase tracking-wide flex items-center gap-1.5">
+                    <Info className="w-3.5 h-3.5 text-[#00783C]" /> Comment & Pourquoi dans ce projet :
                   </span>
-                  <p className="text-xs sm:text-sm dark:text-slate-300 text-slate-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm dark:text-neutral-300 text-neutral-700 leading-relaxed">
                     {activeNode.howWhy}
                   </p>
                 </div>
@@ -229,53 +224,51 @@ export default function ProjectArchitectureModal({ initialProjectId, isOpen, onC
             )}
           </div>
 
-          {/* ============================================================== */}
-          {/* MOBILE ACCORDION VIEW (< 768px)                                */}
-          {/* ============================================================== */}
+          {/* MOBILE ACCORDION VIEW (< 768px) */}
           <div className="block md:hidden mt-6 space-y-3">
             {currentArch.layers.map((layer, lIdx) => (
               <div
                 key={lIdx}
-                className="rounded-2xl dark:bg-dark-950 bg-slate-50 border dark:border-slate-800 border-slate-200 overflow-hidden"
+                className="rounded-2xl dark:bg-black bg-neutral-50 border dark:border-neutral-800 border-neutral-200 overflow-hidden"
               >
                 <button
                   onClick={() => setExpandedMobileLayer(expandedMobileLayer === lIdx ? null : lIdx)}
                   className="w-full p-3.5 flex items-center justify-between text-left"
                 >
-                  <span className="font-bold text-xs dark:text-white text-slate-900">
+                  <span className="font-bold text-xs text-[#00783C]">
                     {layer.name}
                   </span>
                   {expandedMobileLayer === lIdx ? (
-                    <ChevronUp className="w-4 h-4 text-slate-500" />
+                    <ChevronUp className="w-4 h-4 text-[#00783C]" />
                   ) : (
-                    <ChevronDown className="w-4 h-4 text-slate-500" />
+                    <ChevronDown className="w-4 h-4 text-[#00783C]" />
                   )}
                 </button>
 
                 {expandedMobileLayer === lIdx && (
-                  <div className="p-3 space-y-3 border-t dark:border-slate-800 border-slate-200">
+                  <div className="p-3 space-y-3 border-t dark:border-neutral-800 border-neutral-200">
                     {layer.nodes.map((node) => (
                       <div
                         key={node.id}
-                        className="p-3 rounded-xl dark:bg-dark-900 bg-white border dark:border-slate-800 border-slate-200 space-y-1.5"
+                        className="p-3 rounded-xl dark:bg-neutral-900 bg-white border dark:border-neutral-800 border-neutral-200 space-y-1.5"
                       >
                         <div className="flex items-center gap-2">
-                          <div className={`p-1.5 rounded-lg bg-gradient-to-tr ${node.color} text-white`}>
+                          <div className="p-1.5 rounded-lg bg-[#00783C] text-white">
                             <node.icon className="w-3.5 h-3.5" />
                           </div>
                           <div>
-                            <h6 className="font-bold text-xs dark:text-white text-slate-900">
+                            <h6 className="font-bold text-xs dark:text-white text-black">
                               {node.name}
                             </h6>
-                            <span className="text-[10px] font-mono text-cyan-500">
+                            <span className="text-[10px] font-mono text-[#00783C] font-semibold">
                               {node.badge}
                             </span>
                           </div>
                         </div>
-                        <p className="text-xs font-semibold dark:text-cyan-300 text-cyan-800">
+                        <p className="text-xs font-semibold text-[#00783C]">
                           "{node.tooltip}"
                         </p>
-                        <p className="text-[11px] dark:text-slate-400 text-slate-600">
+                        <p className="text-[11px] dark:text-neutral-300 text-neutral-700">
                           {node.howWhy}
                         </p>
                       </div>
@@ -287,13 +280,13 @@ export default function ProjectArchitectureModal({ initialProjectId, isOpen, onC
           </div>
 
           {/* Modal Footer */}
-          <div className="mt-8 pt-4 border-t dark:border-slate-800 border-slate-200 flex items-center justify-between">
-            <span className="text-xs text-slate-500 font-mono">
+          <div className="mt-8 pt-4 border-t dark:border-neutral-800 border-neutral-200 flex items-center justify-between">
+            <span className="text-xs text-[#00783C] font-mono font-semibold">
               6 architectures complètes disponibles
             </span>
             <button
               onClick={onClose}
-              className="px-5 py-2 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 transition-all shadow-md"
+              className="px-5 py-2 rounded-xl text-xs font-semibold text-white bg-[#00783C] hover:bg-[#006533] transition-all shadow-md"
             >
               Fermer l'explorateur
             </button>
@@ -318,28 +311,25 @@ function ArchitectureNodeCard({ node, isActive, onHover, onClick }) {
         whileTap={{ scale: 0.98 }}
         className={`w-full p-3.5 rounded-2xl text-left transition-all duration-300 relative border ${
           isActive
-            ? `dark:bg-dark-950 bg-white shadow-xl ${node.borderColor} ring-2 ring-cyan-500/50`
-            : 'dark:bg-dark-950/70 bg-white/90 dark:border-slate-800 border-slate-200 hover:border-cyan-500/40'
+            ? `dark:bg-black bg-white shadow-xl border-[#00783C] ring-2 ring-[#00783C]/50`
+            : 'dark:bg-black bg-white dark:border-neutral-800 border-neutral-200 hover:border-[#00783C]'
         }`}
-        style={{
-          boxShadow: isActive ? `0 0 20px -5px ${node.glowColor}` : undefined
-        }}
       >
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2.5">
-            <div className={`p-2 rounded-xl bg-gradient-to-tr ${node.color} text-white shadow-xs`}>
+            <div className="p-2 rounded-xl bg-[#00783C] text-white shadow-xs">
               <IconComponent className="w-4 h-4" />
             </div>
             <div>
-              <h5 className="font-bold text-xs sm:text-sm dark:text-white text-slate-900 leading-none">
+              <h5 className="font-bold text-xs sm:text-sm dark:text-white text-black leading-none">
                 {node.name}
               </h5>
-              <span className="text-[10px] font-mono dark:text-slate-400 text-slate-500 mt-1 block">
+              <span className="text-[10px] font-mono text-[#00783C] font-semibold mt-1 block">
                 {node.role}
               </span>
             </div>
           </div>
-          {isActive && <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />}
+          {isActive && <span className="w-2 h-2 rounded-full bg-[#00783C] animate-ping" />}
         </div>
       </motion.button>
 
@@ -350,15 +340,14 @@ function ArchitectureNodeCard({ node, isActive, onHover, onClick }) {
             initial={{ opacity: 0, y: 6, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.96 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 rounded-xl dark:bg-dark-950 bg-slate-900 text-white shadow-2xl border dark:border-cyan-500/40 border-slate-700 pointer-events-none z-30 hidden lg:block"
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 rounded-xl dark:bg-black bg-white dark:text-white text-black shadow-2xl border border-[#00783C] pointer-events-none z-30 hidden lg:block"
           >
-            <div className="text-[11px] font-mono text-cyan-400 font-semibold mb-1 flex items-center gap-1">
-              <Zap className="w-3 h-3" /> {node.name}
+            <div className="text-[11px] font-mono text-[#00783C] font-semibold mb-1 flex items-center gap-1">
+              <Zap className="w-3 h-3 text-[#00783C]" /> {node.name}
             </div>
-            <p className="text-xs text-slate-200 leading-snug">
+            <p className="text-xs dark:text-neutral-300 text-neutral-700 leading-snug">
               {node.tooltip}
             </p>
-            <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900 dark:border-t-dark-950" />
           </motion.div>
         )}
       </AnimatePresence>

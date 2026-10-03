@@ -8,24 +8,37 @@ export default {
   theme: {
     extend: {
       colors: {
+        emsi: {
+          DEFAULT: '#00783C',
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#00783C',
+          600: '#006533',
+          700: '#00522a',
+          800: '#004021',
+          900: '#00331a',
+        },
         dark: {
-          950: '#07090e',
-          900: '#0b0f19',
-          850: '#0f172a',
-          800: '#141d33',
-          700: '#1e293b',
+          950: '#000000',
+          900: '#0a0a0a',
+          850: '#121212',
+          800: '#181818',
+          700: '#242424',
         },
         electric: {
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0284c7',
-          600: '#0369a1',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#00783C',
+          600: '#006533',
         },
         accent: {
-          cyan: '#06b6d4',
-          blue: '#3b82f6',
-          violet: '#8b5cf6',
-          purple: '#a855f7',
+          cyan: '#00783C',
+          blue: '#00783C',
+          violet: '#006533',
+          purple: '#00522a',
         }
       },
       fontFamily: {
@@ -47,8 +60,8 @@ export default {
           '50%': { transform: 'translateY(-10px)' },
         },
         glow: {
-          '0%': { filter: 'drop-shadow(0 0 15px rgba(59, 130, 246, 0.3))' },
-          '100%': { filter: 'drop-shadow(0 0 25px rgba(139, 92, 246, 0.5))' },
+          '0%': { filter: 'drop-shadow(0 0 15px rgba(0, 120, 60, 0.3))' },
+          '100%': { filter: 'drop-shadow(0 0 25px rgba(0, 120, 60, 0.5))' },
         }
       }
     },
