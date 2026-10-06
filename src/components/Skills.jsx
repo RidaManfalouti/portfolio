@@ -1,19 +1,13 @@
 import React from 'react';
-import { Server, Layout, Cpu, Database, Award, CheckCircle, Flame } from 'lucide-react';
-import { skillsData, certifications } from '../data/portfolioData';
+import { Award, Flame } from 'lucide-react';
+import { certifications } from '../data/portfolioData';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanguage } from '../context/LanguageContext';
+import SkillsOrbitFull from './SkillsOrbitFull';
 
 export default function Skills() {
   const [sectionRef, isVisible] = useScrollReveal();
   const { t } = useLanguage();
-
-  const iconMap = {
-    Server: Server,
-    Layout: Layout,
-    Cpu: Cpu,
-    Database: Database,
-  };
 
   return (
     <section id="skills" ref={sectionRef} className="py-24 relative overflow-hidden">
@@ -37,57 +31,9 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* 4 Core Competency Categories Grid */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {Object.entries(skillsData).map(([key, category], index) => {
-            const IconComponent = iconMap[category.icon] || Server;
-
-            return (
-              <div
-                key={key}
-                className={`relative rounded-2xl p-6 glass-card glass-card-hover group border dark:border-neutral-800 border-neutral-200 hover:border-[#00783C] transition-all duration-300 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}
-                style={{ transitionDelay: `${index * 120}ms` }}
-              >
-                {/* Header card icon and title (Small Title in #00783C) */}
-                <div className="flex items-center space-x-3 rtl:space-x-reverse mb-5">
-                  <div className="p-2.5 rounded-xl bg-[#00783C] text-white shadow-md">
-                    <IconComponent className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-lg font-bold text-[#00783C]">
-                    {category.title}
-                  </h3>
-                </div>
-
-                {/* Skill Items List */}
-                <div className="space-y-3">
-                  {category.skills.map((skill, sIdx) => (
-                    <div
-                      key={sIdx}
-                      className="p-2.5 rounded-xl dark:bg-black bg-white border dark:border-neutral-800 border-neutral-200 hover:border-[#00783C]/60 transition-all flex items-center justify-between shadow-xs"
-                    >
-                      <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                        <CheckCircle className="w-3.5 h-3.5 text-[#00783C] shrink-0" />
-                        <span className="text-xs sm:text-sm font-medium dark:text-white text-black">
-                          {skill.name}
-                        </span>
-                      </div>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#00783C]/10 text-[#00783C] border border-[#00783C]/20 font-semibold">
-                        {skill.tag}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Bottom decorative accent line */}
-                <div className="mt-5 pt-3 border-t dark:border-neutral-800 border-neutral-200 flex items-center justify-between text-[11px] dark:text-neutral-400 text-neutral-600 font-mono">
-                  <span>{t.skills.level}</span>
-                  <span className="text-[#00783C] font-semibold">{t.skills.productionReady}</span>
-                </div>
-              </div>
-            );
-          })}
+        {/* Orbit Visualization Component */}
+        <div className={`mt-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <SkillsOrbitFull />
         </div>
 
         {/* Certifications Banner */}
